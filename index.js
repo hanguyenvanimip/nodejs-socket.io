@@ -13,13 +13,15 @@ app.set('views',path.join(__dirname,'views'));
 app.set('view engine','ejs');
 
 io.on('connection',(socket)=>{   
-    socket.broadcast.emit('Hi everyone') ;
-    socket.on('chatmessage',(msg)=>{
-        io.emit('chatmessage',msg);
+    socket.on('Client_send_data',(msg)=>{
+        //io.sockets.emit('Server_send_data',msg);//gui tat ca
+        //socket.emit('Server_send_data',msg);//gui lai cho chinh no
+        socket.broadcast.emit('Server_send_data',msg);
     });
+
     socket.on('disconnect',()=>{
         console.log('Co nguoi thoat ra',socket.id);
-    })
+    });
 });
 
 app.get('',(req,res)=>{
