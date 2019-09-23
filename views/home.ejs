@@ -6,79 +6,48 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Chat real time</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-
-            body {
-                font: 13px Helvetica, Arial;
-            }
-
-            form {
-                background: #000;
-                padding: 3px;
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-            }
-
-            form input {
-                border: 0;
-                padding: 10px;
-                width: 90%;
-                margin-right: .5%;
-            }
-
-            form button {
-                width: 9%;
-                background: rgb(130, 224, 255);
-                border: none;
-                padding: 10px;
-            }
-
-            #messages {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-            }
-
-            #messages li {
-                padding: 5px 10px;
-            }
-
-            #messages li:nth-child(odd) {
-                background: #eee;
-            }
-        </style>
+       
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
         <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="/socket.io/socket.io.js"></script>
-        <script>
-           
-            var socket = io();
-
-            $(document).ready(function () {
-                $('form').submit((e) => {
-                    e.preventDefault();
-                    socket.emit('Client_send_data', $('#m').val());
-                    $('#m').val('');
-                    return false;
-                });
-                
-                socket.on('Server_send_data',(msg)=>{
-                    $("#messages").append($("<li>").text(msg));
-                });   
-            });
-        </script>
+        <script src="/socket.io/socket.io.js"></script>        
+        <script src="js/app.js"></script> 
     </head>
 
     <body>
-        <ul id="messages"></ul>
-        <form action="">
-            <input id="m" autocomplete="off" /><button>Send</button>
-        </form>
+        <div id="wrapper">
+
+            <div id="loginForm">
+              <h3>Register?</h3>
+              <input type="text" id="txtUsername" />
+              <input type="button" value="Register" id="btnRegister" />
+              <div id="errorRegister"></div>
+            </div>
+        
+            <div id="chatForm">
+              <div id="left">
+                <div id="boxTitle">Users Online</div>
+                <div id="boxContent">
+                   
+                </div>
+              </div>
+              <div id="right">
+                <div id="sayHi">
+                  Hello <span id="currentUser"></span>
+                  <input type="button" id="btnLogout" value="Logout">
+                </div>
+        
+                <div id="listMessages">
+                </div>
+        
+                <div id="thongbao"></div>
+        
+                <input type="text" id="txtMessage" />
+                <input type="button" id="btnSendMessage" value="Send" />
+        
+              </div>
+            </div>
+        
+          </div>
     </body>
 
 </html>
